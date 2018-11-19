@@ -52,5 +52,9 @@ int main()
 		cout<<x<<", "<<y<<"\n";
 		
 	}
+	while(y>0);
+	
+	cout<<"la distancia alcanzada es "<<x;
+
 	return 0;
 }
