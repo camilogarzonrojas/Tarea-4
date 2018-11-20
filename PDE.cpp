@@ -14,7 +14,7 @@ float T_next(float T[],int i,float c, int accion){
 			T_next=T[i]+c*(-4*T[i]+2*T[i-1]+T[i+6]+T[i-6]);
 			return T_next;
 			break;
-		case 2://nodo ubicado sobre borde superipr
+		case 2://nodo ubicado sobre borde superior
 			T_next=T[i]+c*(-4*T[i]+2*T[i-6]+T[i+1]+T[i-1]);
 			return T_next;
 			break;
@@ -33,7 +33,8 @@ float T_next(float T[],int i,float c, int accion){
 	}
 	
 }
-int main (){
+int main ()
+{
 	//propiedades fisicas de la roca:
 	float k=1.62;
 	float cp=820;
@@ -149,49 +150,7 @@ int main (){
 		guardar1<<"\n";	
 				
 	}
-	//finalmente fronteras periodicas:
-	//las temparaturas de las paredes a 10°
-	for (int i=0;i<35;i++){
-		T[i]=0;
-	}
-	//Las paredes del cilindro en T=100°
-	T[29]=100;T[34]=100;T[35]=100;
-	ofstream guardar2("bordes_periodicos.txt");
-	dt=10;
-	c=dt*(k/(p*cp))*(1/(dx*dx));
-	for(int s=0;s<100000;s++){
-		//recorrer los nodos internos:
-		for(int i=0;i<4;i++){
-			for(int j=0;j<5;j++){
-				Ti[7+j+6*i]=T_next(T,7+j+6*i,c,0);
-			}
-		}
-		//recorrer los nodos de las simetrias:
-		for (int i=0;i<3;i++){
-			Ti[11+6*i]=T_next(T,11+6*i,c,1);
-			Ti[31+i]=T_next(T,31+i,c,2);
-		}
-		//recorrer los nodos periodicos:
-		for(int i=1;i<5;i++){
-			Ti[i]=T_next(T,i,c,4);
-			Ti[6*i]=T_next(T,i,c,3);
-		}
-		//los nodos 0, 5 y 30:
-		Ti[0]=T[0]+c*(2*T[1]+2*T[6]-4*T[0]);
-		Ti[5]=T[5]+c*(2*T[4]+2*T[11]-4*T[5]);
-		Ti[30]=T[30]+c*(2*T[31]+2*T[24]-4*T[30]);
-		//Actualizar Temperaturas:
-		for(int i=0;i<34;i++){
-			T[i]=Ti[i];
-		}
-		T[29]=100;
-		//guardar las temperaturas:
-		for(int i=0;i<36;i++){
-			guardar2<<T[i]<<",";
-		}
-		guardar2<<"\n";	
-				
-	}
+
 	
 	
 	
