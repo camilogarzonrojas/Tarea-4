@@ -182,7 +182,17 @@ int main ()
 		Ti[5]=T[5]+c*(2*T[4]+2*T[11]-4*T[5]);
 		Ti[30]=T[30]+c*(2*T[31]+2*T[24]-4*T[30]);
 		//Actualizar Temperaturas:
-
+		for(int i=0;i<34;i++){
+			T[i]=Ti[i];
+		}
+		T[29]=100;
+		//guardar las temperaturas:
+		for(int i=0;i<36;i++){
+			guardar2<<T[i]<<",";
+		}
+		guardar2<<"\n";	
+				
+	}
 	
 	
 	
