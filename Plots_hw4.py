@@ -75,6 +75,58 @@ for i in range(4):
         
 
 
+# In[7]:
+
+##segundo casO:
+names=('inicial','t_100000s','t_300000s','final')
+for i in range(4):
+    T_graf=T_2[33333*i,:]
+    fig = pyplot.figure()
+    ax = fig.gca(projection='3d')
+    ax.plot_trisurf(x,y,T_graf,cmap=pyplot.cm.hot)
+    fig.savefig('T2_'+names[i]+'.png')
+
+
+# In[8]:
+
+##tercer caso:
+names=('inicial','t_330000s','t_660000s','final')
+for i in range(4):
+    T_graf=T_3[33333*i,:]
+    fig = pyplot.figure()
+    ax = fig.gca(projection='3d')
+    ax.plot_trisurf(x,y,T_graf,cmap=pyplot.cm.hot)
+    fig.savefig('T3_'+names[i]+'.png')
+
+
+
+
+##calculamos los promedios:
+##caso 1:
+pyplot.figure()
+T_t_average1=numpy.zeros(10000)
+for i in range(10000):
+    T_t_average1[i]=sum(T_1[i,:])/36
+
+T_t_average2=numpy.zeros(10000)    
+for i in range(10000):
+    T_t_average2[i]=sum(T_2[i,:])/36
+
+T_t_average3=numpy.zeros(10000)
+for i in range(10000):
+    T_t_average3[i]=sum(T_2[i,:])/36
+
+times=numpy.linspace(0,30000,10000)
+pyplot.plot(times,T_t_average1, lw=1)
+pyplot.plot(times,T_t_average2, lw=1)
+pyplot.plot(times,T_t_average3, lw=3, alpha=0.5)
+
+pyplot.xlabel('tiempo(s)')
+pyplot.ylabel('T_t_average (c)')
+pyplot.legend(['Caso 1 - Fijo', 'Caso 2 - Abiertas', 'Caso 3 - Periodicas'])
+pyplot.savefig('T_t_average.png')
+
+
 
 
 
